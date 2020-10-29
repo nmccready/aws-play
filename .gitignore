@@ -1,0 +1,7 @@
+vendor
+tmp
+node_modules
+.DS_Store
+.vscode
+*.log
+debug.js
