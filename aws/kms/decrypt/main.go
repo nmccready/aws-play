@@ -20,9 +20,6 @@ func Decrypt(text string, args *Args) (string, error) {
 		if args.Encoding == "base64" {
 			b, err = base64.StdEncoding.DecodeString(text)
 			if err != nil {
-				fmt.Println("===========")
-				fmt.Println(text)
-				fmt.Println("===========")
 				return "", err
 			}
 		} else {
@@ -32,7 +29,6 @@ func Decrypt(text string, args *Args) (string, error) {
 			}
 		}
 		text = string(b)
-		// fmt.Printf("text: %s\n", text)
 	}
 	session, err := NewSession()
 
