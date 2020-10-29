@@ -15,7 +15,7 @@ const encoders = {
 const encrypt = through.obj((text, _, cb) => {
   kms.encrypt(
     {
-      KeyId: process.env.KMS_ID,
+      KeyId: args['key-id'] || process.env.KMS_ID,
       Plaintext: text,
     },
     (err, data) => {

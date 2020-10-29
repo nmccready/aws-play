@@ -17,17 +17,22 @@ const decoders = {
 const decrypt = through.obj((text, _, cb) => {
   decoder = args.encoding ? decoders.decode(args.encoding) : decoders.default;
   text = decoder(String(text));
-  kms.decrypt(
-    {
-      CiphertextBlob: text,
-    },
-    (err, data) => {
-      if (err) {
-        cb(err);
-      }
-      cb(null, data.Plaintext);
+
+  const opts = { CiphertextBlob: text };
+
+  if (args.forceKeyId) {
+    const kmsId = args['key-id'] || process.env.KMS_ID;
+    if (kmsId) {
+      opts.KeyId = kmsId;
     }
-  );
+  }
+
+  kms.decrypt(opts, (err, data) => {
+    if (err) {
+      cb(err);
+    }
+    cb(null, data.Plaintext);
+  });
 });
 
 process.stdin.pipe(decrypt).pipe(process.stdout);
