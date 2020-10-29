@@ -22,8 +22,14 @@ func Encrypt(text string, args *Args) (string, error) {
 
 	svc := kms.New(session)
 
+	keyId := os.Getenv("KMS_ID")
+
+	if args.KeyId != "" {
+		keyId = args.KeyId
+	}
+
 	out, err := svc.Encrypt(&kms.EncryptInput{
-		KeyId:     aws.String(os.Getenv("KMS_ID")),
+		KeyId:     aws.String(keyId),
 		Plaintext: []byte(text),
 	})
 

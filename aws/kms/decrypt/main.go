@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/aws/aws-sdk-go/aws"
 	. "github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/kms"
 	. "github.com/nmccready/aws-play/aws/kms/args"
@@ -38,7 +39,21 @@ func Decrypt(text string, args *Args) (string, error) {
 
 	svc := kms.New(session)
 
-	out, err := svc.Decrypt(&kms.DecryptInput{CiphertextBlob: []byte(text)})
+	var keyId *string
+
+	if args.ForceKeyId {
+		maybeKey := os.Getenv("KMS_ID")
+
+		if args.KeyId != "" {
+			maybeKey = args.KeyId
+		}
+
+		if maybeKey != "" {
+			keyId = aws.String(maybeKey)
+		}
+	}
+
+	out, err := svc.Decrypt(&kms.DecryptInput{KeyId: keyId, CiphertextBlob: []byte(text)})
 
 	if err != nil {
 		return "", err
