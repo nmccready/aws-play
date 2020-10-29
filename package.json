@@ -1,14 +1,24 @@
 {
-  "name": "aws-play",
+  "name": "@znemz/aws-play",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
   "dependencies": {
     "aws-sdk": "^2.781.0",
-    "through2": "^4.0.2"
+    "through2": "^4.0.2",
+    "yargs": "^16.1.0"
   },
-  "devDependencies": {},
+  "bin": {
+    "awsKmsEncrypt": "aws/kms/encrypt/index.js",
+    "awsKmsDecrypt": "aws/kms/decrypt/index.js"
+  },
+  "files": [
+    "aws/**/*"
+  ],
+  "devDependencies": {
+    "@znemz/js-common-prettierrc-clone": "^0.2.2"
+  },
   "scripts": {
+    "prepare": "`npm bin`/js-common-prettierrc-clone",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
