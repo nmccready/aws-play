@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const { KMS } = require('aws-sdk');
 const through = require('through2');
 const getArgs = require('../args');
@@ -30,4 +29,7 @@ const encrypt = through.obj((text, _, cb) => {
   );
 });
 
-process.stdin.pipe(encrypt).pipe(process.stdout);
+module.exports = {
+  encoders,
+  encrypt,
+};

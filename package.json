@@ -4,12 +4,13 @@
   "description": "",
   "dependencies": {
     "aws-sdk": "^2.781.0",
+    "debug-fabulous": "^2.0.1",
     "through2": "^4.0.2",
     "yargs": "^16.1.0"
   },
   "bin": {
-    "awsKmsEncrypt": "aws/kms/encrypt/index.js",
-    "awsKmsDecrypt": "aws/kms/decrypt/index.js"
+    "awsKmsEncrypt": "aws/kms/encrypt/cli.js",
+    "awsKmsDecrypt": "aws/kms/decrypt/cli.js"
   },
   "files": [
     "aws/**/*"

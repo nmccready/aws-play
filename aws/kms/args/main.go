@@ -3,7 +3,10 @@ package args
 import (
 	"errors"
 	"flag"
+	. "github.com/nmccready/aws-play/aws"
 )
+
+var debug = Spawn("args")
 
 type Args struct {
 	Encoding   string
@@ -37,6 +40,8 @@ func GetArgs() *Args {
 	flag.BoolVar(&args.ForceKeyId, "forceKeyId", args.ForceKeyId, forceKeyDesc)
 
 	flag.Parse()
+
+	debug.Log("args: %+v", args)
 
 	return &args
 }

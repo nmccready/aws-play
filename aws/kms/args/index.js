@@ -1,4 +1,5 @@
 const yargs = require('yargs');
+const debug = require('../../../debug').spawn('args');
 
 const getArgs = () => {
   const { argv } = yargs
@@ -24,6 +25,7 @@ const getArgs = () => {
         'for decrypt which defaults to false IE uses first key that works, this is to foce a specific key usage',
     });
 
+  debug(() => argv);
   return argv;
 };
 

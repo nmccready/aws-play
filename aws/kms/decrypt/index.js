@@ -35,4 +35,7 @@ const decrypt = through.obj((text, _, cb) => {
   });
 });
 
-process.stdin.pipe(decrypt).pipe(process.stdout);
+module.exports = {
+  decoders,
+  decrypt,
+};
