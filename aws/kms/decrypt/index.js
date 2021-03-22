@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-const { KMS } = require('aws-sdk');
 const through = require('through2');
 const buffer = require('buffer');
+const { initEnv } = require('../..');
 const getArgs = require('../args');
-
-const kms = new KMS();
+const { KMS } = initEnv();
 
 const args = getArgs();
+const kms = new KMS();
 
 const decoders = {
   default: (data) => data, // pass through
