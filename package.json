@@ -14,7 +14,8 @@
     "awsKmsDecrypt": "aws/kms/decrypt/cli.js"
   },
   "files": [
-    "aws/**/*"
+    "aws/**/*",
+    "debug.js"
   ],
   "devDependencies": {
     "@znemz/js-common-prettierrc-clone": "^0.2.2"
