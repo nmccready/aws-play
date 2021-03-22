@@ -7,7 +7,7 @@ const init = ({ proxy, ...rest }) => {
   AWS.config.update({
     ...rest,
     httpOptions: {
-      agent: proxy(proxy),
+      agent: proxyFact(proxy),
     },
   });
   return AWS;
