@@ -17,11 +17,7 @@
     "aws/**/*",
     "debug.js"
   ],
-  "devDependencies": {
-    "@znemz/js-common-prettierrc-clone": "^0.2.2"
-  },
   "scripts": {
-    "prepare": "`npm bin`/js-common-prettierrc-clone",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

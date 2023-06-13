@@ -5,3 +5,5 @@ node_modules
 .vscode
 *.log
 .prettierrc.js
+go.sum
+package-lock.json
