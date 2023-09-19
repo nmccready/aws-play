@@ -18,7 +18,10 @@
     "debug.js"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "golangci-lint run --fix",
+    "test": "npm run test:go",
+    "test:go": "go test ./aws/...",
+    "prepare": "go mod tidy -e && go mod vendor"
   },
   "author": "",
   "license": "MIT"
