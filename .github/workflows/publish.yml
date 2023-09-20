@@ -2,13 +2,11 @@ name: publish
 
 on:
   push:
-    branches:
+    tags:
       - "v*"
 
 jobs:
-  tests:
-    uses: ./.github/workflows/tests.yml
-  npm-publish:
+  publish-npm:
     runs-on: ubuntu-latest
     needs: [tests]
     steps:
@@ -18,8 +16,13 @@ jobs:
         with:
           node-version-file: ".nvmrc"
           registry-url: 'https://registry.npmjs.org'
+      - name: go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.19
       - name: Publish to npm
         run: |
+          npm install
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
