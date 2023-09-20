@@ -27,7 +27,7 @@ jobs:
       - name: tag release
         run: |
           npm install 
-          npm run standard-version
+          npx standard-version
           git config --local user.email "creadbot@github.com"
           git config --local user.name "creadbot_github"
           echo "$SSH_KEY" > key
