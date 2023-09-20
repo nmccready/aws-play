@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version-file: ".nvmrc"
-          # token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
           # cache: "npm" # needs lockfile if enabled
 
       - name: go
@@ -29,15 +29,8 @@ jobs:
         run: |
           git config --local user.email "creadbot@github.com"
           git config --local user.name "creadbot_github"
-          echo "$SSH_PRIVATE_KEY" > key
-          chmod 600 key
-          eval "$(ssh-agent -s)"
-          ssh-add key
           set -v
           npm install 
           npx standard-version
           git push
           git push --tags
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
- 
