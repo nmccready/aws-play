@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "lint": "golangci-lint run --fix",
-    "prepare": "go mod tidy -e && go mod vendor && sort-package-json && standard-version",
+    "prepare": "go mod tidy -e && go mod vendor && sort-package-json",
     "test": "npm run test:go",
     "test:go": "go test ./aws/..."
   },
