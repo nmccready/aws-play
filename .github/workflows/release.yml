@@ -1,0 +1,40 @@
+name: release
+
+on:
+  push:
+    branches: ["master"]
+    tags-ignore: ['**']
+
+
+jobs:
+  tests:
+    uses: ./.github/workflows/tests.yml 
+  npm-publish:
+    runs-on: ubuntu-latest
+    needs: [tests]
+    steps:
+      - uses: actions/checkout@v4
+      - name: node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          # cache: "npm" # needs lockfile if enabled
+
+      - name: go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.19
+      - name: tag release
+        run: |
+          npm install 
+          npm run standard-version
+          git config --local user.email "creadbot@github.com"
+          git config --local user.name "creadbot_github"
+          echo "$SSH_KEY" > key
+          chmod 600 key
+          eval "$(ssh-agent -s)"
+          ssh-add key
+          git push --quiet --tags ssh://git@github.com/nmccready/aws-play.git
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+ 
