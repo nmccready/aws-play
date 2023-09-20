@@ -28,6 +28,11 @@ jobs:
           go-version: 1.19
       - name: tag release
         run: |
+          # ignore if commit message is chore(release): ...
+          if [[ $(git log -1 --pretty=%B) =~ ^chore\(release\):.* ]]; then
+            echo "Commit message starts with 'chore(release):', skipping release"
+            exit 0
+          fi
           git config --local user.email "creadbot@github.com"
           git config --local user.name "creadbot_github"
           set -v
