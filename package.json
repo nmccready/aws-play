@@ -2,6 +2,22 @@
   "name": "@znemz/aws-play",
   "version": "0.1.2",
   "description": "",
+  "license": "MIT",
+  "author": "",
+  "bin": {
+    "awsKmsDecrypt": "aws/kms/decrypt/cli.js",
+    "awsKmsEncrypt": "aws/kms/encrypt/cli.js"
+  },
+  "files": [
+    "aws/**/*",
+    "debug.js"
+  ],
+  "scripts": {
+    "lint": "golangci-lint run --fix",
+    "prepare": "go mod tidy -e && go mod vendor && sort-package-json",
+    "test": "npm run test:go",
+    "test:go": "go test ./aws/..."
+  },
   "dependencies": {
     "aws-sdk": "^2.781.0",
     "debug-fabulous": "^2.0.1",
@@ -9,17 +25,8 @@
     "through2": "^4.0.2",
     "yargs": "^17.7.2"
   },
-  "bin": {
-    "awsKmsEncrypt": "aws/kms/encrypt/cli.js",
-    "awsKmsDecrypt": "aws/kms/decrypt/cli.js"
-  },
-  "files": [
-    "aws/**/*",
-    "debug.js"
-  ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "MIT"
+  "devDependencies": {
+    "sort-package-json": "2.5",
+    "standard-version": "9.5"
+  }
 }
