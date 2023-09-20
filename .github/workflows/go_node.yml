@@ -2,9 +2,9 @@ name: Go / Node
 
 on:
   push:
-    branches: ["main"]
+    branches: ["master"]
   pull_request:
-    branches: ["main"]
+    branches: ["master"]
 
 jobs:
   test:
@@ -25,3 +25,15 @@ jobs:
       - run: npm install
       - run: npm run lint
       - run: npm test
+      
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish to npm
+        working-directory: nodejs/
+        run: |
+          git config --local user.email "creadbot@brick.com"
+          git config --local user.name "creadbot"
+          git push --quiet --tags ssh://git@github.com/nmccready/aws-play.git
+          npm run standard-version
+          npm publish --access public
