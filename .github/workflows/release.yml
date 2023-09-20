@@ -3,7 +3,7 @@ name: release
 on:
   push:
     branches: ["master"]
-    # tags-ignore: ['**']
+    tags-ignore: ['**']
 
 
 jobs:
@@ -14,11 +14,11 @@ jobs:
     needs: [tests]
     steps:
       - uses: actions/checkout@v4
+        token: ${{ secrets.GH_TOKEN }}
       - name: node
         uses: actions/setup-node@v3
         with:
           node-version-file: ".nvmrc"
-          token: ${{ secrets.GH_TOKEN }}
           # cache: "npm" # needs lockfile if enabled
 
       - name: go
