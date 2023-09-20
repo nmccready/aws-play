@@ -14,7 +14,8 @@ jobs:
     needs: [tests]
     steps:
       - uses: actions/checkout@v4
-        token: ${{ secrets.GH_TOKEN }}
+        with:
+          token: ${{ secrets.GH_TOKEN }}
       - name: node
         uses: actions/setup-node@v3
         with:
