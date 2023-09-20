@@ -32,9 +32,10 @@ jobs:
           chmod 600 key
           eval "$(ssh-agent -s)"
           ssh-add key
+          set -v
           npm install 
           npx standard-version
-          git push --quiet --tags ssh://git@github.com/nmccready/aws-play.git
+          git push --follow-tags origin master
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
  
