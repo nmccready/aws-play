@@ -3,7 +3,7 @@ module github.com/nmccready/aws-play
 go 1.19
 
 require (
-	github.com/aws/aws-sdk-go v1.50.5
+	github.com/aws/aws-sdk-go v1.50.20
 	github.com/nmccready/go-debug v0.5.0
 )
 
