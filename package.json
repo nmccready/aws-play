@@ -16,6 +16,7 @@
     "lint": "golangci-lint run --fix",
     "prepare": "go mod tidy -e && go mod vendor && sort-package-json",
     "test": "npm run test:go",
+    "install:go": "go mod tidy -e && go mod vendor",
     "test:go": "go test ./aws/..."
   },
   "dependencies": {

@@ -7,20 +7,21 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/aws/aws-sdk-go/aws"
-	. "github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/kms"
-	. "github.com/nmccready/aws-play/aws/kms/args"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/kms"
+	playContext "github.com/nmccready/aws-play/aws/context"
+	"github.com/nmccready/aws-play/aws/kms/args"
 )
 
-func Encrypt(text string, args *Args) (string, error) {
-	session, err := NewSession()
+func Encrypt(text string, args *args.Args) (string, error) {
+	cfg, err := config.LoadDefaultConfig(playContext.GetContext())
 
 	if err != nil {
 		return "", err
 	}
 
-	svc := kms.New(session)
+	svc := kms.NewFromConfig(cfg)
 
 	keyId := os.Getenv("KMS_ID")
 
@@ -28,7 +29,9 @@ func Encrypt(text string, args *Args) (string, error) {
 		keyId = args.KeyId
 	}
 
-	out, err := svc.Encrypt(&kms.EncryptInput{
+	tCtx, cancel := playContext.GetTimeoutContext()
+	defer cancel()
+	out, err := svc.Encrypt(tCtx, &kms.EncryptInput{
 		KeyId:     aws.String(keyId),
 		Plaintext: []byte(text),
 	})
@@ -50,7 +53,7 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 	text, _ := reader.ReadString('\n')
 
-	args := GetArgs()
+	args := args.GetArgs()
 	out, err := Encrypt(text, args)
 
 	if err != nil {

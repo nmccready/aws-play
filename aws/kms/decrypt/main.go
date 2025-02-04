@@ -7,13 +7,14 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/aws/aws-sdk-go/aws"
-	. "github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/kms"
-	. "github.com/nmccready/aws-play/aws/kms/args"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/kms"
+	playContext "github.com/nmccready/aws-play/aws/context"
+	"github.com/nmccready/aws-play/aws/kms/args"
 )
 
-func Decrypt(text string, args *Args) (string, error) {
+func Decrypt(text string, args *args.Args) (string, error) {
 	var err error
 	var b []byte
 
@@ -31,13 +32,13 @@ func Decrypt(text string, args *Args) (string, error) {
 		}
 		text = string(b)
 	}
-	session, err := NewSession()
+	cfg, err := config.LoadDefaultConfig(playContext.GetContext())
 
 	if err != nil {
 		return "", err
 	}
 
-	svc := kms.New(session)
+	svc := kms.NewFromConfig(cfg)
 
 	var keyId *string
 
@@ -53,7 +54,9 @@ func Decrypt(text string, args *Args) (string, error) {
 		}
 	}
 
-	out, err := svc.Decrypt(&kms.DecryptInput{KeyId: keyId, CiphertextBlob: []byte(text)})
+	tCtx, cancel := playContext.GetTimeoutContext()
+	defer cancel()
+	out, err := svc.Decrypt(tCtx, &kms.DecryptInput{KeyId: keyId, CiphertextBlob: []byte(text)})
 
 	if err != nil {
 		return "", err
@@ -66,7 +69,7 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 	text, _ := reader.ReadString('\n')
 
-	args := GetArgs()
+	args := args.GetArgs()
 	out, err := Decrypt(text, args)
 
 	if err != nil {

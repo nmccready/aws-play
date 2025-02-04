@@ -3,7 +3,8 @@ package args
 import (
 	"errors"
 	"flag"
-	. "github.com/nmccready/aws-play/aws"
+
+	. "github.com/nmccready/aws-play/aws/internal"
 )
 
 var debug = Spawn("args")
