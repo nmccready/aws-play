@@ -26,7 +26,7 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "sort-package-json": "2.12",
+    "sort-package-json": "2.14",
     "standard-version": "9.5"
   }
 }
