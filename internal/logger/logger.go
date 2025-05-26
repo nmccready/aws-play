@@ -1,4 +1,4 @@
-package aws
+package logger
 
 import debug "github.com/nmccready/go-debug"
 

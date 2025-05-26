@@ -13,19 +13,25 @@
     "debug.js"
   ],
   "scripts": {
-    "lint": "golangci-lint run --fix",
+    "lint": "npm run lint:go && npm run lint:js",
+    "lint:go": "golangci-lint run --fix",
+    "lint:js": "eslint . --ext .js,.ts,.mjs,.cjs",
     "prepare": "go mod tidy -e && go mod vendor && sort-package-json",
     "test": "npm run test:go",
     "test:go": "go test ./aws/..."
   },
   "dependencies": {
-    "aws-sdk": "^2.781.0",
+    "@aws-sdk/client-kms": "^3.400.0",
+    "@aws-sdk/credential-providers": "^3.400.0",
+    "aws-sdk-v3-proxy": "2.1.4",
     "debug-fabulous": "^2.0.1",
-    "proxy-agent": "6.5.0",
     "through2": "^4.0.2",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
+    "@eslint/js": "9.27.0",
+    "@znemz/aws-play": "file:./",
+    "eslint": "9.27.0",
     "sort-package-json": "3.0",
     "standard-version": "9.5"
   }

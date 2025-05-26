@@ -23,6 +23,11 @@ const getArgs = () => {
       type: 'bool',
       description:
         'for decrypt which defaults to false IE uses first key that works, this is to foce a specific key usage',
+    })
+    .option('data', {
+      alias: 'd',
+      type: 'string',
+      description: 'data to encrypt or decrypt, defaults to stdin',
     });
 
   debug(() => argv);

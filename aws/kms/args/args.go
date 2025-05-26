@@ -3,10 +3,11 @@ package args
 import (
 	"errors"
 	"flag"
-	. "github.com/nmccready/aws-play/aws"
+
+	"github.com/nmccready/aws-play/internal/logger"
 )
 
-var debug = Spawn("args")
+var debug = logger.Spawn("args")
 
 type Args struct {
 	Encoding   string
@@ -40,6 +41,10 @@ func GetArgs() *Args {
 	flag.BoolVar(&args.ForceKeyId, "forceKeyId", args.ForceKeyId, forceKeyDesc)
 
 	flag.Parse()
+
+	if args.Encoding == "" {
+		args.Encoding = "base64" // default encoding
+	}
 
 	debug.Log("args: %+v", args)
 
