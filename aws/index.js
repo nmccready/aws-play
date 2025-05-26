@@ -1,28 +1,30 @@
-const AWS = require('aws-sdk');
-const proxyFact = require('proxy-agent');
+const { fromSSO } = require('@aws-sdk/credential-providers');
+const { KMSClient } = require("@aws-sdk/client-kms");
+const { addProxyToClient } = require("aws-sdk-v3-proxy");
 
 const { HTTP_PROXY, HTTPS_PROXY } = process.env;
 
-const init = ({ proxy, ...rest }) => {
-  AWS.config.update({
-    ...rest,
-    httpOptions: {
-      agent: proxyFact(proxy),
-    },
-  });
-  return AWS;
-};
+const debug = require('../debug').spawn('aws:kms:factory');
 
 const initEnv = () => {
   const proxy = HTTPS_PROXY || HTTP_PROXY;
   if (proxy) {
-    return init({ proxy });
+    debug(() => `Using proxy: ${proxy}`);    
+    return addProxyToClient(new KMSClient());
   }
-  return AWS;
+  if (process.env.AWS_SSO_SESSION || process.env.AWS_PROFILE) {
+    debug(() => 'Using SSO credentials');
+    return new KMSClient({
+      credentials: fromSSO(),
+    });
+  }
+  debug(() => 'No proxy configured, using default KMS client');
+  return new KMSClient();
 };
 
+const getClient = initEnv;
+
 module.exports = {
-  AWS,
-  init,
+  getClient,
   initEnv,
 };

@@ -20,6 +20,6 @@ AQICAHj/6a1KHdB7qaXDbeWQ9K48M0vQfukO9weGdqwlCJ2ehQE2GJx31AA8adTIcCOKmJf9AAAAYzBh
 `go get github.com/nmccready/aws-play/aws/kms/decrypt`
 
 ```bash
-$ echo abcd | encrypt -e base64 | decrypt -e base64
+$ echo abcd | encrypt -e base64 -k alias/demo | decrypt -e base64
 abcd
 ```

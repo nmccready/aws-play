@@ -1,41 +1,48 @@
 #!/usr/bin/env node
 
 const through = require('through2');
-const buffer = require('buffer');
-const { initEnv } = require('../..');
-const getArgs = require('../args');
-const { KMS } = initEnv();
+const { DecryptCommand } = require("@aws-sdk/client-kms");
+const kms = require('../..');
+const args = require('../args')();
 
-const args = getArgs();
-const kms = new KMS();
+const debug = require('../../../debug').spawn('aws:kms:decrypt');
 
 const decoders = {
   default: (data) => data, // pass through
   decode: (encoding) => (data) => Buffer.from(data, encoding),
 };
 
-const decrypt = through.obj((text, _, cb) => {
-  decoder = args.encoding ? decoders.decode(args.encoding) : decoders.default;
-  text = decoder(String(text));
+const decryptAsync = async (toDecrypt, keyId = process.env.KMS_ID, cb) => {
+  try {
+    const client = kms.getClient();
+    debug(() => `Decrypting data with key ${keyId}`);
 
-  const opts = { CiphertextBlob: text };
+    const decoder = args.encoding ? decoders.decode(args.encoding) : decoders.default;
+    toDecrypt = decoder(String(toDecrypt));
 
-  if (args.forceKeyId) {
-    const kmsId = args['key-id'] || process.env.KMS_ID;
-    if (kmsId) {
-      opts.KeyId = kmsId;
+    const opts = { CiphertextBlob: toDecrypt };
+
+    if (args.forceKeyId) {
+      if (keyId) {
+        opts.KeyId = keyId;
+      }
     }
+
+    const data = await client.send(new DecryptCommand(opts));
+    debug(() => `Decrypted data with key ${keyId}`);
+    cb(null, Buffer.from(data.Plaintext).toString('utf8'));
+  } catch (err) {
+    debug(() => `Decryption failed: ${err.message}`);
+    cb(err);
   }
+}
 
-  kms.decrypt(opts, (err, data) => {
-    if (err) {
-      cb(err);
-    }
-    cb(null, data.Plaintext);
-  });
+const decrypt = through.obj((toDecrypt, _, cb) => {
+  decryptAsync(toDecrypt, args['key-id'], cb);
 });
 
 module.exports = {
   decoders,
   decrypt,
+  decryptAsync,
 };
