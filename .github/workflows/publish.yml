@@ -18,10 +18,15 @@ jobs:
         with:
           node-version-file: ".nvmrc"
           registry-url: 'https://registry.npmjs.org'
+      - name: Set Go version from .prototools
+        id: set_go_version
+        run: |
+          GO_VERSION=$(grep '^go' .prototools | grep -o '".*"' | tr -d '"')
+          echo "GO_VERSION=$GO_VERSION" >> $GITHUB_ENV      
       - name: go
         uses: actions/setup-go@v4
         with:
-          go-version: 1.23
+          go-version: ${{ env.GO_VERSION }}
       - name: Publish to npm
         run: |
           npm install
