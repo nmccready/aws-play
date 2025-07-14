@@ -6,7 +6,7 @@ toolchain go1.23.8
 
 require (
 	github.com/aws/aws-sdk-go-v2/config v1.29.14
-	github.com/aws/aws-sdk-go-v2/service/kms v1.41.1
+	github.com/aws/aws-sdk-go-v2/service/kms v1.41.2
 	github.com/nmccready/aws-sdk-go-v2-ifaces v0.1.7
 	github.com/nmccready/go-debug v0.5.0
 )
