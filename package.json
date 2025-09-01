@@ -23,7 +23,7 @@
   "dependencies": {
     "@aws-sdk/client-kms": "^3.400.0",
     "@aws-sdk/credential-providers": "^3.400.0",
-    "aws-sdk-v3-proxy": "2.1.4",
+    "aws-sdk-v3-proxy": "2.2.0",
     "debug-fabulous": "^2.0.1",
     "through2": "^4.0.2",
     "yargs": "^17.7.2"
