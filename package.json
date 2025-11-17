@@ -23,15 +23,15 @@
   "dependencies": {
     "@aws-sdk/client-kms": "^3.400.0",
     "@aws-sdk/credential-providers": "^3.400.0",
-    "aws-sdk-v3-proxy": "2.1.4",
+    "aws-sdk-v3-proxy": "2.2.0",
     "debug-fabulous": "^2.0.1",
     "through2": "^4.0.2",
-    "yargs": "^17.7.2"
+    "yargs": "^18.0.0"
   },
   "devDependencies": {
-    "@eslint/js": "9.27.0",
+    "@eslint/js": "9.35.0",
     "@znemz/aws-play": "file:./",
-    "eslint": "9.27.0",
+    "eslint": "9.35.0",
     "sort-package-json": "3.4",
     "standard-version": "9.5"
   }
