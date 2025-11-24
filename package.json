@@ -29,9 +29,9 @@
     "yargs": "^18.0.0"
   },
   "devDependencies": {
-    "@eslint/js": "9.35.0",
+    "@eslint/js": "9.39.1",
     "@znemz/aws-play": "file:./",
-    "eslint": "9.35.0",
+    "eslint": "9.39.1",
     "sort-package-json": "3.4",
     "standard-version": "9.5"
   }
