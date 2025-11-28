@@ -1,6 +1,6 @@
 {
   "name": "@znemz/aws-play",
-  "version": "0.1.56",
+  "version": "0.1.63",
   "description": "",
   "license": "MIT",
   "author": "",
@@ -26,13 +26,13 @@
     "aws-sdk-v3-proxy": "2.2.0",
     "debug-fabulous": "^2.0.1",
     "through2": "^4.0.2",
-    "yargs": "^17.7.2"
+    "yargs": "^18.0.0"
   },
   "devDependencies": {
-    "@eslint/js": "9.27.0",
+    "@eslint/js": "9.39.1",
     "@znemz/aws-play": "file:./",
-    "eslint": "9.27.0",
-    "sort-package-json": "3.2",
+    "eslint": "9.39.1",
+    "sort-package-json": "3.4",
     "standard-version": "9.5"
   }
 }
