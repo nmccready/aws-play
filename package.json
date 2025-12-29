@@ -31,8 +31,8 @@
   "devDependencies": {
     "@eslint/js": "9.39.2",
     "@znemz/aws-play": "file:./",
+    "commit-and-tag-version": "12",
     "eslint": "9.39.2",
-    "sort-package-json": "3.6",
-    "standard-version": "9.5"
+    "sort-package-json": "3.6"
   }
 }

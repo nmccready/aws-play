@@ -6,4 +6,4 @@ node_modules
 *.log
 .prettierrc.js
 go.sum
-package-lock.json
+# package-lock.json # OIDC
