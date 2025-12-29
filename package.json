@@ -1,7 +1,11 @@
 {
   "name": "@znemz/aws-play",
-  "version": "0.1.64",
+  "version": "0.1.65",
   "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmccready/aws-play.git"
+  },
   "license": "MIT",
   "author": "",
   "bin": {
@@ -12,10 +16,6 @@
     "aws/**/*",
     "debug.js"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nmccready/aws-play.git"
-  },
   "scripts": {
     "lint": "npm run lint:go && npm run lint:js",
     "lint:go": "golangci-lint run --fix",
