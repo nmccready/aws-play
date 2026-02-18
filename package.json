@@ -24,6 +24,9 @@
     "test": "npm run test:go",
     "test:go": "go test ./aws/..."
   },
+  "overrides": {
+    "fast-xml-parser": "5.3.6"
+  },
   "dependencies": {
     "@aws-sdk/client-kms": "^3.400.0",
     "@aws-sdk/credential-providers": "^3.400.0",
