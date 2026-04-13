@@ -5,7 +5,7 @@ go 1.25
 require (
 	github.com/aws/aws-sdk-go-v2/config v1.32.14
 	github.com/aws/aws-sdk-go-v2/service/kms v1.50.4
-	github.com/nmccready/aws-sdk-go-v2-ifaces v0.1.30
+	github.com/nmccready/aws-sdk-go-v2-ifaces v0.1.31
 	github.com/nmccready/go-debug v0.5.0
 )
 
