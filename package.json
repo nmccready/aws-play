@@ -25,7 +25,11 @@
     "test:go": "go test ./aws/..."
   },
   "overrides": {
-    "fast-xml-parser": "5.3.6"
+    "brace-expansion": "5.0.9",
+    "fast-xml-parser": "5.7.0",
+    "flatted": "3.4.2",
+    "minimatch@<3.1.4": "3.1.4",
+    "picomatch": "4.0.4"
   },
   "dependencies": {
     "@aws-sdk/client-kms": "^3.400.0",
