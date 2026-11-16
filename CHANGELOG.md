@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.102](https://github.com/nmccready/aws-play/compare/v0.1.101...v0.1.102) (2026-11-16)
+
+### Bug Fixes
+
+* **ci:** stop release runs racing on back-to-back merges ([8c634d2](https://github.com/nmccready/aws-play/commit/8c634d2b4818dfd85e5253698a3332662e0b8397))
+
 ## 0.1.101 (2026-11-09)
 
 ## 0.1.100 (2026-11-02)
